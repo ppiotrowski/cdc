@@ -278,7 +278,7 @@ def play_cd(change, albumNum, trackNum, play):
             albumNum = len(r) - 2  # there is an empty line at the end
             trackNum = 1
         album = r[albumNum]
-        audio_dir = album.replace(CDC_PATH+'/',album,1)
+        audio_dir = album.replace(CDC_PATH+'/','',1)
         logger.info(album)
         write_config(albumNum, trackNum)
         dir = CDC_PATH+'/'
