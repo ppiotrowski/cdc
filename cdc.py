@@ -553,10 +553,11 @@ while True:
                     if len(r) > 1:
                         tr = locale.atoi(r[1])
                         # hu.set_status(albumNum, trackNum, timer)
-                        #if tr != trackNum:
-                            #trackNum = tr
-                            #write_config(albumNum, trackNum)
-                            #hu.set_status(albumNum, trackNum, timer)
+                        if tr != trackNum:
+                            trackNum = tr
+                            write_config(albumNum, trackNum)
+                            logger.info('change')
+                            hu.set_status(albumNum, trackNum, timer)
                 else:
                     albumNum = albumNum + 1
                     trackNum = 1
