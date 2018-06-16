@@ -37,6 +37,8 @@ disp.clear()
 disp.display()
 
 filename = ''
+audio_type = ''
+audio_dir = '';
 
 width = disp.width
 height = disp.height
@@ -60,6 +62,7 @@ lcd_state = ''
 def update_lcd():
     global lcdt
     global filename
+    global audio_type
     global lcd_state
     new_lcd_state = filename+str(power_off)+str(bluetooth)+str(usb_storage)
 
@@ -98,6 +101,10 @@ def update_lcd():
 
     w, h = draw.textsize(filename, font=font)
     draw.text((0, 16), filename, font=font, fill=255)
+    audio = audio_type
+    if(audio_type=='MP3'):
+        audio = audio+' '+audio_dir
+    draw.text((0, 0), audio, font=font, fill=255)
 
     if(filename==''):
         text = '- - -'
@@ -256,6 +263,7 @@ def shuffle(album):
 
 # load new cd-dir
 def play_cd(change, albumNum, trackNum, play):
+    global audio_dir
     #r = cmd('mpc ls')
     r = cmd('find '+CDC_PATH+'/ -maxdepth 1 -type d')
     if r is not None:
@@ -268,7 +276,7 @@ def play_cd(change, albumNum, trackNum, play):
             albumNum = len(r) - 2  # there is an empty line at the end
             trackNum = 1
         album = r[albumNum]
-        #album = album.replace(CDC_PATH+'/',album,1)
+        audio_dir = album.replace(CDC_PATH+'/',album,1)
         logger.info(album)
         write_config(albumNum, trackNum)
         dir = CDC_PATH+'/'
@@ -435,6 +443,7 @@ while True:
 
 
         if (usb_storage and bluetooth_play == False):
+            audio_type = 'MP3'
             # start play
             if cdc_cmd == hu.HU_PLAY:
                 cmd('mpc play')
@@ -558,6 +567,8 @@ while True:
         # if usb_storage
         if(connected):
             if (bluetooth and bluetooth_mp):
+                audio_type = 'BT'
+                audio_dir = ''
                 # logger.info(cdc_cmd)
                 if cdc_cmd == hu.HU_PLAY:
                     logger.info('play BT')
