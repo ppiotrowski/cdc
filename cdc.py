@@ -19,6 +19,7 @@ mpd = MPDClient()               # create client object
 mpd.timeout = 10                # network timeout in seconds (floats allowed), default: None
 mpd.idletimeout = None          # timeout for fetching the result of the idle command is handled seperately, default: None
 mpd.connect("localhost", 6600)
+config_load = None
 
 from pybtooth import BluetoothManager
 
@@ -204,6 +205,7 @@ def mount():
 # load the configuration file
 # fix it
 def read_config(albumNum, trackNum):
+    global config_load
     with open(CONFIG, 'r') as file:
         cfgfile = file.read()
     config = ConfigParser.RawConfigParser(allow_no_value=True)
@@ -225,6 +227,7 @@ def read_config(albumNum, trackNum):
         albumNum = config.getint('cdc', 'album')
         trackNum = config.getint('cdc', 'track')
         logger.info('read config album: {}, track: {}'.format(albumNum, trackNum))
+        config_load = True
     except:
         logger.warning('can\'t read config file')
     return [albumNum, trackNum]
@@ -541,7 +544,7 @@ while True:
 		    else:
 			filename = '...'
 		#print "\n\n", curSongInfo['artist'] + " - " + curSongInfo['title'] + "\n"
-                if (r is not None) and (len(r) > 0):
+                if (r is not None) and (len(r) > 0 and config_load is not None):
                     # r='[playing] #18/37   1:53/4:50 (38%)'
                     r = r.split('/')
                     # r='[playing] #18', '37   1:53', '4:50 (38%)
