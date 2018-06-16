@@ -98,7 +98,12 @@ def update_lcd():
 
     w, h = draw.textsize(filename, font=font)
     draw.text((0, 16), filename, font=font, fill=255)
-    
+
+    if(filename==''):
+        text = '- - -'
+        w, h = draw.textsize(text, font=font)
+        draw.text(((width / 2) - (w / 2), (height / 2) - (h / 2)), text, font=font, fill=255)
+
     disp.image(image)
     disp.display()
     if (lcdt>10):
@@ -355,7 +360,7 @@ while True:
 
 	if cdc_cmd == hu.HU_POWER_OFF:
 	    power_off=1
-	    
+
 	    disp.begin()
 	    disp.clear()
 	    disp.display()
