@@ -446,6 +446,7 @@ while True:
                 # prev
                 elif cdc_cmd == hu.HU_PREV:
                     cmd('mpc prev')
+                    cmd('mpc prev')
 
                 # next
                 elif cdc_cmd == hu.HU_SEEK_FWD:
