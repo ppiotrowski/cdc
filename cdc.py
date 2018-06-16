@@ -256,7 +256,8 @@ def shuffle(album):
 
 # load new cd-dir
 def play_cd(change, albumNum, trackNum, play):
-    r = cmd('mpc ls')
+    #r = cmd('mpc ls')
+    r = cmd('find '+CDC_PATH+'/ -type d')
     if r is not None:
         r = r.split('\n')
         logger.info('found {} albums'.format(len(r) - 1))
