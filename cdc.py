@@ -298,6 +298,7 @@ def play_cd(change, albumNum, trackNum, play):
             cmd('mpc play ' + str(trackNum))
             hu.set_status(albumNum, trackNum)
         else:
+            cmd('mpc play ' + str(trackNum))
             cmd('mpc pause')
         logger.info('debug: album: {}, track: {}'.format(albumNum, trackNum))
     return [albumNum, trackNum]
@@ -547,7 +548,7 @@ while True:
 		#print "\n\n", curSongInfo['artist'] + " - " + curSongInfo['title'] + "\n"
                 if (r is not None) and (len(r) > 0 and config_load is not None):
                     # r='[playing] #18/37   1:53/4:50 (38%)'
-                    logger.info(r)
+                    #logger.info(r)
                     r = r.split('/')
 
                     # r='[playing] #18', '37   1:53', '4:50 (38%)
