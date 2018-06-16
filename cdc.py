@@ -257,7 +257,7 @@ def shuffle(album):
 # load new cd-dir
 def play_cd(change, albumNum, trackNum, play):
     #r = cmd('mpc ls')
-    r = cmd('find '+CDC_PATH+'/ -type d')
+    r = cmd('find '+CDC_PATH+'/ -maxdepth 1 -type d')
     if r is not None:
         r = r.split('\n')
         logger.info('found {} albums'.format(len(r) - 1))
@@ -268,13 +268,16 @@ def play_cd(change, albumNum, trackNum, play):
             albumNum = len(r) - 2  # there is an empty line at the end
             trackNum = 1
         album = r[albumNum]
+        //album = album.replace(CDC_PATH+'/',album,1)
         logger.info(album)
         write_config(albumNum, trackNum)
         cmd('mpc clear')
         if shuffle(album):
-            cmd('mpc listall \'' + album + '\' | shuf | mpc add')
+            #cmd('mpc listall \'' + album + '\' | shuf | mpc add')
+            cmd('find \'' + album + '\' -maxdepth 1 -type f -printf "%f\n" | shuf | mpc add')
         else:
-            cmd('mpc listall \'' + album + '\' | mpc add')
+            #cmd('mpc listall \'' + album + '\' | mpc add')
+            cmd('find \'' + album + '\' -maxdepth 1 -type f -printf "%f\n" | mpc add')
         #		cmd('mpc volume 100')
         if play:
             cmd('mpc play ' + str(trackNum))
