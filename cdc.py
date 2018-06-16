@@ -271,13 +271,14 @@ def play_cd(change, albumNum, trackNum, play):
         #album = album.replace(CDC_PATH+'/',album,1)
         logger.info(album)
         write_config(albumNum, trackNum)
+        dir = album.replace('/','\/')
         cmd('mpc clear')
         if shuffle(album):
             #cmd('mpc listall \'' + album + '\' | shuf | mpc add')
-            cmd('find \'' + album + '\' -maxdepth 1 -type f -printf "%f\n" | shuf | mpc add')
+            cmd('find \'' + album + '\' -maxdepth 1 -type f | sed \'s/'+dir+'//g\' | shuf | mpc add')
         else:
             #cmd('mpc listall \'' + album + '\' | mpc add')
-            cmd('find \'' + album + '\' -maxdepth 1 -type f -printf "%f\n" | mpc add')
+            cmd('find \'' + album + '\' -maxdepth 1 -type f | sed \'s/'+dir+'//g\' | mpc add')
         #		cmd('mpc volume 100')
         if play:
             cmd('mpc play ' + str(trackNum))
@@ -449,9 +450,7 @@ while True:
 
                 # prev
                 elif cdc_cmd == hu.HU_PREV:
-                    mpd.previous()
-                    #cmd('mpc prev')
-                    #cmd('mpc prev')
+                    cmd('mpc prev')
 
                 # next
                 elif cdc_cmd == hu.HU_SEEK_FWD:
