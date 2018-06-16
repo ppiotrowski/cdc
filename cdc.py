@@ -363,7 +363,7 @@ while True:
             nums = read_config(albumNum, trackNum)
             albumNum = nums[0]
             trackNum = nums[1]
-            logger.debug('read from config album: {}, track: {}'.format(albumNum, trackNum))
+            logger.info('read from config album: {}, track: {}'.format(albumNum, trackNum))
             nums = play_cd(None, albumNum, trackNum, play)
             albumNum = nums[0]
             trackNum = nums[1]
@@ -563,6 +563,7 @@ while True:
                     nums = play_cd(None, albumNum, trackNum, play)
                     albumNum = nums[0]
                     trackNum = nums[1]
+                    logger.info('no album')
 	    else:
 		filename = ''
         # if play
