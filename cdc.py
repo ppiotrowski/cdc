@@ -559,7 +559,7 @@ while True:
                         if tr != trackNum:
                             trackNum = tr
                             write_config(albumNum, trackNum)
-                            logger.info('change '+tr+' '+trackNum)
+                            logger.info('change '+str(tr)+' '+str(trackNum))
                             hu.set_status(albumNum, trackNum, timer)
                 else:
                     albumNum = albumNum + 1
