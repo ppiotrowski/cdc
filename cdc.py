@@ -99,17 +99,19 @@ def update_lcd():
         draw.line((width - 12, 4, width - 12, 6), fill=255)
         draw.line((width - 11, 4, width - 11, 5), fill=255)
 
-    w, h = draw.textsize(filename, font=font)
-    draw.text((0, 16), filename, font=font, fill=255)
-    audio = audio_type
-    if(audio_type=='MP3'):
-        audio = audio+' '+audio_dir
-    draw.text((0, 0), audio, font=font, fill=255)
+    #w, h = draw.textsize(filename, font=font)
+
 
     if(filename==''):
         text = '- - -'
         w, h = draw.textsize(text, font=font)
         draw.text(((width / 2) - (w / 2), (height / 2) - (h / 2)), text, font=font, fill=255)
+    else:
+        draw.text((0, 16), filename, font=font, fill=255)
+        audio = audio_type
+        if(audio_type=='MP3'):
+            audio = audio+' '+audio_dir
+        draw.text((0, 0), audio, font=font, fill=255)
 
     disp.image(image)
     disp.display()
