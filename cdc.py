@@ -547,7 +547,9 @@ while True:
 		#print "\n\n", curSongInfo['artist'] + " - " + curSongInfo['title'] + "\n"
                 if (r is not None) and (len(r) > 0 and config_load is not None):
                     # r='[playing] #18/37   1:53/4:50 (38%)'
+                    logger.info(r)
                     r = r.split('/')
+
                     # r='[playing] #18', '37   1:53', '4:50 (38%)
                     timer = None
                     if len(r) > 2:
