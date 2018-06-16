@@ -370,6 +370,7 @@ while True:
             nums = play_cd(None, albumNum, trackNum, play)
             albumNum = nums[0]
             trackNum = nums[1]
+            logger.info(str(albumNum)+' '+str(trackNum))
 
         if usb_storage and not find_dev(MASS_STORAGE):
             logger.warning('missing Mass Storage')
