@@ -268,7 +268,7 @@ def play_cd(change, albumNum, trackNum, play):
             albumNum = len(r) - 2  # there is an empty line at the end
             trackNum = 1
         album = r[albumNum]
-        //album = album.replace(CDC_PATH+'/',album,1)
+        #album = album.replace(CDC_PATH+'/',album,1)
         logger.info(album)
         write_config(albumNum, trackNum)
         cmd('mpc clear')
