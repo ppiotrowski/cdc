@@ -271,7 +271,7 @@ def play_cd(change, albumNum, trackNum, play):
         #album = album.replace(CDC_PATH+'/',album,1)
         logger.info(album)
         write_config(albumNum, trackNum)
-        dir = album.replace('/','\/')
+        dir = CDC_PATH+'/'.replace('/','\/')
         cmd('mpc clear')
         if shuffle(album):
             #cmd('mpc listall \'' + album + '\' | shuf | mpc add')
